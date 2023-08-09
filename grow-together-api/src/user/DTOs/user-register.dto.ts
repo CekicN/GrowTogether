@@ -1,5 +1,6 @@
 import {IsEmail, IsNotEmpty, Length, Matches} from 'class-validator';
 import { MESSAGES, REGEX } from 'src/app.utils';
+import { Skill } from '../entities/user.entity';
 
 export class UserRegistrationDto
 {
@@ -9,7 +10,7 @@ export class UserRegistrationDto
     @IsNotEmpty()
     surname:string;
 
-    @IsNotEmpty()
+    @IsNotEmpty() 
     username:string;
 
     @IsEmail()
@@ -24,4 +25,7 @@ export class UserRegistrationDto
     @Length(8, 24)
     @Matches(REGEX.PASSWORD_REG, {message:MESSAGES.PASSWORD_MSG})
     confirmPassword:string;
+
+    @IsNotEmpty()
+    skill:Skill;
 }

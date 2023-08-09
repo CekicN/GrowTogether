@@ -8,6 +8,6 @@ export const typeOrmConfig:ConnectionOptions = {
     username: 'postgres',
     password: 'mysecretpassword',
     database: "GrowTogetherDB",
-    entities:[User],
+    entities:[__dirname + '/**/entities/*.entity{.ts,.js}'],
     synchronize:true
 }

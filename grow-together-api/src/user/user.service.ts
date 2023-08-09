@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserRegistrationDto } from './DTOs/user-register.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { use } from 'passport';
 @Injectable()
 export class UserService {
 
@@ -19,6 +20,7 @@ export class UserService {
         user.username = userRegisterDto.username;
         user.email = userRegisterDto.email; 
         user.password = cryptPassword;
+        user.skill = userRegisterDto.skill;
         user.role = 'user';
         
         return await user.save();
