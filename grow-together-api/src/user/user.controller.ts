@@ -5,8 +5,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { User } from './entities/user.entity';
 import path, { join } from 'path';
-import { createReadStream, existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, readdir, unlink } from 'fs';
 import { ApiBadRequestResponse } from '@nestjs/swagger';
+import { of } from 'rxjs';
 
 @Controller('user')
 export class UserController {
@@ -21,6 +22,7 @@ export class UserController {
         return await this.userService.registerUser(userRegisterDto);
     }
 
+    
     @Post('uploadImage/:id')
     @UseInterceptors(FileInterceptor('file', { 
         storage: diskStorage({
@@ -28,9 +30,13 @@ export class UserController {
                 const start = req.url.indexOf("uploadImage/");
                 const userId = req.url.substring(start+12);
 
+                //Kreira folder
                 const uploadPath = `./uploads/profileImages/${userId}`;
                 if(!existsSync(uploadPath))
                     mkdirSync(uploadPath, {recursive:true});
+
+                //Brise sadrzaj
+                deleteFiles(uploadPath);
 
                 callback(null, uploadPath);
             },
@@ -47,7 +53,7 @@ export class UserController {
             callback(null, true);
         },
     }))
-    uploadImage(@UploadedFile() file:Express.Multer.File, @Param('id', ParseIntPipe) id:number)
+    async uploadImage(@UploadedFile() file:Express.Multer.File, @Param('id', ParseIntPipe) id:number)
     {
         if(!file)
         {
@@ -55,19 +61,34 @@ export class UserController {
         }
         else
         {
-            const response = {
-                filePath: `http://localhost:3000/user/profile_image/${id}|${file.filename}`
-            };
-            return response;
+            let user = await this.userService.getUserById(id);
+            user.profileImagePath = file.filename;
+            this.userService.updateUser(id, user);
         }
     }
 
-    @Get('profile_image/:filename')
-    async getProfileImage(@Param('filename') filename:string)
+    @Get('profile_image/:id')
+    async getProfileImage(@Param('id', ParseIntPipe) id:number, @Res() res)
     {
-        filename.replace("|", "/");
-        console.log(filename);
-       const file = createReadStream('./uploads/profileImages/'+filename);
-       return new StreamableFile(file)
+        const user = await this.userService.getUserById(id);
+        const imagePath = `${process.cwd()}/uploads/profileImages/${id}/${user.profileImagePath}`;
+
+        return of(res.sendFile(imagePath));
+
     }
+}
+
+function deleteFiles(path:string)
+{
+    readdir(path, (err, files) => {
+        if(err) throw new BadRequestException("could not read directory");
+
+        files.forEach(file => {
+            const file_path = path + "/" + file;
+            unlink(file_path, (err) => {
+                if(err) throw new BadRequestException("Could not delete file");
+                console.log("Deleted" + file_path);
+            });
+        })
+    })
 }

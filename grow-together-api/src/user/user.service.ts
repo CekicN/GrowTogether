@@ -26,6 +26,10 @@ export class UserService {
         return await user.save();
     }
 
+    async updateUser(id:number, user:User)
+    {
+        return User.update(id, user);
+    }
     async getUserByEmail(email:string)
     {
         return User.findOne({where:{email}});
