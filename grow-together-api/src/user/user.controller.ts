@@ -3,10 +3,7 @@ import { UserService } from './user.service';
 import { UserRegistrationDto } from './DTOs/user-register.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { User } from './entities/user.entity';
-import path, { join } from 'path';
 import { existsSync, mkdirSync, readdir, unlink } from 'fs';
-import { ApiBadRequestResponse } from '@nestjs/swagger';
 import { of } from 'rxjs';
 
 @Controller('user')
@@ -34,9 +31,8 @@ export class UserController {
                 const uploadPath = `./uploads/profileImages/${userId}`;
                 if(!existsSync(uploadPath))
                     mkdirSync(uploadPath, {recursive:true});
-
-                //Brise sadrzaj
-                deleteFiles(uploadPath);
+                else
+                    deleteFiles(uploadPath);
 
                 callback(null, uploadPath);
             },
@@ -67,7 +63,7 @@ export class UserController {
         }
     }
 
-    @Get('profile_image/:id')
+    @Get('profile-image/:id')
     async getProfileImage(@Param('id', ParseIntPipe) id:number, @Res() res)
     {
         const user = await this.userService.getUserById(id);
@@ -75,6 +71,16 @@ export class UserController {
 
         return of(res.sendFile(imagePath));
 
+    }
+
+    @Get('profile-data/:id')
+    async getProfileData(@Param('id', ParseIntPipe) id:number)
+    {
+        const user = await this.userService.getProfileData(id);
+
+        if(!user)
+            throw new BadRequestException("User not found");
+        return user;
     }
 }
 

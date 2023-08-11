@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import "@fontsource/quicksand";
+*{
+    font-family: "Quicksand";
+}
+
+@import "../node_modules/toastr/build/toastr.css";
+
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+.bg{
+    background-color: rgb(14, 157, 4);
+    z-index: -2;
+    height: 80vh;
+}

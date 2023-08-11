@@ -1,0 +1,12 @@
+.translate-middle-y
+{
+    transform: translateY(50%)!important;
+}
+h1{
+    letter-spacing: 2rem;
+    color: white;
+}
+p{
+    color: #ffffff;
+    line-height: 2;
+}

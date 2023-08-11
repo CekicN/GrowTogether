@@ -38,4 +38,13 @@ export class UserService {
     {
         return User.findOneBy({id});
     }
+    async getProfileData(id:number)
+    {
+        return User.createQueryBuilder('user')
+                    .where("user.id = :id", { id: id })
+                    .select(
+                        'user.id, user.name, user.surname, user.username, user.email, user.skill'
+                    ).getRawOne();
+    }
+
 }

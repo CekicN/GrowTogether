@@ -1,0 +1,73 @@
+nav{
+    background-color: #0e9d04;
+    border-bottom: 1px solid white;
+    padding: 10px;
+}
+
+nav h1{
+  color:white;
+  margin-left: 20px;
+}
+  .navbar {
+    padding: 0;
+  }
+  .navbar .navbar-nav .nav-item {
+    position: relative;
+    margin: 0 2em;
+    height: 46px;
+  }
+  
+  .navbar-nav li >a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    background-color: rgb(112, 246, 16);
+    width: 0%;
+    height: 4px;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .navbar-nav li >a:hover::after {
+    width: 100%;
+  }
+  .navbar-nav  a
+  {
+    font-weight: 700;
+    color:white;
+  }
+  .active{
+    border-bottom: 4px solid rgb(112, 246, 16);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .dropdown-menu>.dropdown-item:hover{
+    background-color: rgb(14, 157, 4);
+  }
+
+@media screen and (max-width:1326px)
+{
+  .navbar .navbar-nav .nav-item {
+    margin: 0 1em;
+  }
+}
+@media  screen and (max-width:1000px) {
+  .navbar .navbar-nav .nav-item {
+    margin: 0 10px;
+  }
+}
+@media  screen and (max-width:714px) {
+  .navbar .navbar-nav .nav-item {
+    margin: 0 5px;
+  }
+}
+@media  screen and (max-width:650px) {
+  .navbar .navbar-nav .nav-item {
+    margin: 0 0px;
+  }
+}
+@media  screen and (max-width:585px) {
+  .navbar .navbar-nav .nav-item {
+    margin: 0 -2px;
+  }
+}
