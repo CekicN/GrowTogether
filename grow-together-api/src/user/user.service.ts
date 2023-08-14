@@ -9,8 +9,11 @@ export class UserService {
     async registerUser(userRegisterDto:UserRegistrationDto)
     {
         const u = await this.getUserByEmail(userRegisterDto.email);
-        if(u) throw new BadRequestException();
-
+        if(u) throw new BadRequestException("User already exist");
+		if(userRegisterDto.password != userRegisterDto.confirmPassword)
+		{
+			throw new BadRequestException("Passwords arent equals");
+		}
         const crypt = await bcrypt.genSalt();
         const cryptPassword:string = await bcrypt.hash(userRegisterDto.password, crypt);
 

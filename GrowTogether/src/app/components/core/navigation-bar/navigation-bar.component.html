@@ -5,9 +5,26 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end navigacija" id="navbarSupportedContent">
     <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active"[routerLinkActiveOptions]={exact:true}>Home</a></li>
-        <li class="nav-item Log rounded hover" ><a class="nav-link" routerLink="/login" routerLinkActive="active">Log In</a></li>
-        <li class="nav-item hover" ><a class="nav-link" routerLink="/profile" routerLinkActive="active">PROFIL</a></li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/" routerLinkActive="active"[routerLinkActiveOptions]={exact:true}>Home</a>
+        </li>
+        <li class="nav-item Log rounded hover" >
+            <a class="nav-link" routerLink="/plants" routerLinkActive="active">Plants</a>
+        </li>
+        <li class="nav-item Log rounded hover" >
+            <a class="nav-link" routerLink="/forum" routerLinkActive="active">Forum</a>
+        </li>
+        <li class="nav-item Log rounded hover" *ngIf="!(isAuthenticated | async)">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">Log In</a>
+        </li>
+        <li class="nav-item Log rounded hover" *ngIf="isAuthenticated | async">
+            <a class="nav-link">Logout</a>
+        </li>
+
+        <li class="nav-item hover" *ngIf="isAuthenticated | async">
+            <a class="nav-link" routerLink="/profile" routerLinkActive="active">
+            <fa-icon [icon]="['fas', 'user']" style="color:white" size="xl"></fa-icon>
+        </a></li>
     </ul>
     </div>
 </nav>

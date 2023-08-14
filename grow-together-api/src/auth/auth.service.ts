@@ -11,9 +11,9 @@ export class AuthService {
     async validateUserCred(email:string, password:string):Promise<any>
     {
         const user = await this.userService.getUserByEmail(email);
-        if(!user) throw new BadRequestException();
+        if(!user) throw new BadRequestException("User not found");
 
-        if(!(await bcrypt.compare(password,user.password))) throw new UnauthorizedException();
+        if(!(await bcrypt.compare(password,user.password))) throw new BadRequestException("Password is incorrect");
 
         return user;
     }
@@ -22,10 +22,15 @@ export class AuthService {
     {
         return {
             token: this.jwtService.sign({
+                sub: user.id,
+				name:user.name,
+				surname:user.surname,
                 username:user.username,
                 email:user.email,
                 role:user.role,
-                sub: user.id
+				skill:user.skill,
+				createdAt:user.createdAt,
+				profileImagePath:user.profileImagePath
             })
         }
     }

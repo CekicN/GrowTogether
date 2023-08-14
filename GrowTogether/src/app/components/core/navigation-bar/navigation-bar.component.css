@@ -1,5 +1,5 @@
 nav{
-    background-color: #0e9d04;
+    background-color: #0a4226;
     border-bottom: 1px solid white;
     padding: 10px;
 }
@@ -37,12 +37,9 @@ nav h1{
     color:white;
   }
   .active{
-    border-bottom: 4px solid rgb(112, 246, 16);
+    border-bottom: 4px solid rgb(11, 191, 5);
     border-radius: 2px;
     pointer-events: none;
-  }
-  .dropdown-menu>.dropdown-item:hover{
-    background-color: rgb(14, 157, 4);
   }
 
 @media screen and (max-width:1326px)

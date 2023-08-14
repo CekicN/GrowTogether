@@ -1,0 +1,9 @@
+.col-sm-9
+{
+    display: flex;
+    justify-content: space-between;
+}
+p
+{
+    width: 100%;
+}
