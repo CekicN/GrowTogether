@@ -49,7 +49,7 @@ export class UserController {
             callback(null, true);
         },
     }))
-    async uploadImage(@UploadedFile() file:Express.Multer.File, @Param('id', ParseIntPipe) id:number)
+    async uploadImage(@UploadedFile() file:Express.Multer.File, @Param('id', ParseIntPipe) id:number, @Res() res)
     {
         if(!file)
         {
@@ -60,6 +60,10 @@ export class UserController {
             let user = await this.userService.getUserById(id);
             user.profileImagePath = file.filename;
             this.userService.updateUser(id, user);
+			
+			const imagePath = `${process.cwd()}/uploads/profileImages/${id}/${user.profileImagePath}`;
+			
+			return of(res.sendFile(imagePath));
         }
     }
 
@@ -67,7 +71,16 @@ export class UserController {
     async getProfileImage(@Param('id', ParseIntPipe) id:number, @Res() res)
     {
         const user = await this.userService.getUserById(id);
-        const imagePath = `${process.cwd()}/uploads/profileImages/${id}/${user.profileImagePath}`;
+        let imagePath;
+        if(user.profileImagePath != null)
+        {
+            imagePath = `${process.cwd()}/uploads/profileImages/${id}/${user.profileImagePath}`;
+        }
+        else
+        {
+            imagePath = `${process.cwd()}/uploads/common/no_image.jpg`;
+        }
+        
 
         return of(res.sendFile(imagePath));
 

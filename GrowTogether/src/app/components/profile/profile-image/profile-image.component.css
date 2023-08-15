@@ -5,3 +5,13 @@ fa-icon
 input{
     display: none;
 }
+.mb-2 {
+    margin-bottom: 2rem!important;
+}
+.my-3 {
+    margin-top: 2rem!important;
+    margin-bottom: 2rem!important;
+}
+h5{
+    font-size:1.75rem;
+}

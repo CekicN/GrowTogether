@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store/app.state';
 import { isAuthenticated } from '../../user-auth/state/auth.selector';
+import { loginSuccess } from '../../user-auth/state/auth.actions';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -20,5 +21,10 @@ export class NavigationBarComponent implements OnInit {
   }
   ngOnInit():void{
     this.isAuthenticated = this.store.select(isAuthenticated);
+  }
+
+  logout()
+  {
+    this.store.dispatch(loginSuccess({user:null}));
   }
 }

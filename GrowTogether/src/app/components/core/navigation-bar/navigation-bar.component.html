@@ -17,7 +17,7 @@
         <li class="nav-item Log rounded hover" *ngIf="!(isAuthenticated | async)">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">Log In</a>
         </li>
-        <li class="nav-item Log rounded hover" *ngIf="isAuthenticated | async">
+        <li class="nav-item Log rounded hover" *ngIf="isAuthenticated | async" (click)="logout()">
             <a class="nav-link">Logout</a>
         </li>
 

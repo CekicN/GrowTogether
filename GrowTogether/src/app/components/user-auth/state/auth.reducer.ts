@@ -10,6 +10,7 @@ const _authReducer = createReducer(initialState,
         }
     }),
     on(signupSuccess, (state, action) => {
+        
         return {
             ...state,
             user:action.user
