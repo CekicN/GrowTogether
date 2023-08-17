@@ -1,0 +1,29 @@
+<div *ngIf="plants" class="d-flex justify-content-start flex-wrap mt-2">
+    <div class="card col-md-3 margin" *ngFor="let plant of (plants|async)">
+        <div class="card-body">
+            <img class="img-thumbnail w-100 h-50" [src]="plant.imageUrls[0]" alt="" style="cursor:pointer;">
+            <h4 class="text-center mt-1">{{plant.name}}</h4>
+            <hr>
+            <div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span>PlantType: </span><span>{{plant.plantType}}</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <span>Address: </span><span>{{plant.address}}</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <span style="cursor:pointer;">By: {{plant.user.id}}</span>
+                    </div>
+                    <div>   
+                        <div class="d-flex justify-content-center align-items-center bg-success ms-3 mb-3" (click)="addToCart(plant)">
+                        <fa-icon [icon]="['fas', 'shopping-cart']" style="color:white;"></fa-icon>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

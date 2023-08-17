@@ -83,12 +83,21 @@ export class PlantController {
         const response = {data:[]}
 
         try{
-            const fileNames = await readDir(directory);
-            const files = fileNames.map( async (filename) => {
+            let files:Promise<Buffer>[];
+            if(fs.existsSync(directory))
+            {
+                
+                const fileNames = await readDir(directory);
+                files = fileNames.map( async (filename) => {
                 const filepath = directory + "/" + filename;
                 return readFile(filepath);
-            })
-
+                })
+            }
+            else
+            {
+                files.push(readFile(`${process.cwd()}/uploads/common/no_image.jpg`));
+                
+            }
             Promise.all(files)
             .then((fileContents) => {
               response.data = fileContents;

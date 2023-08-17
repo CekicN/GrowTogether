@@ -1,0 +1,15 @@
+h3{
+    color:white;
+}
+.category
+{
+    background-color: white;
+    border-radius: 7px;
+    height: 80vh;
+    width: 100%;
+    box-shadow: black 0px 0px 3px 0px;
+}
+ul.list-group li.list-group-item {
+    background-color:transparent !important;
+    border: none !important;
+  }

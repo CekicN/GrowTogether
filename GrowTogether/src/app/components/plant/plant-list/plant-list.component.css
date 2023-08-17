@@ -1,0 +1,26 @@
+.bg-success
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.margin
+{
+    flex: 0 0 auto;
+    margin-right: 1%;
+    margin-bottom: 1%;
+}
+.col-md-3
+{
+    width: 24% !important;
+}
+.img-thumbnail:hover
+{
+    scale: 1.3;
+    transition: ease-in 0.25s;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }

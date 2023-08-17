@@ -5,9 +5,11 @@ import { ProfileComponent } from './components/profile/profile/profile.component
 import { LoginComponent } from './components/user-auth/login/login.component';
 import { SignupComponent } from './components/user-auth/signup/signup.component';
 import { authGuard } from './Guards/auth.guard';
+import { PlantComponent } from './components/plant/plant/plant.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path:'plant', component:PlantComponent},
   {path:'profile', component:ProfileComponent, canActivate:[authGuard]},
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent}

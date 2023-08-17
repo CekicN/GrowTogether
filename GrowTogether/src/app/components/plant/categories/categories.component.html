@@ -1,0 +1,12 @@
+<div class="col text-center mt-3 ms-3 mw-50">
+    <div>
+        <h3>Categories</h3>
+        <div class="category">
+          <ul class="list-group ">
+            <li *ngFor="let category of (categories|async)" class="list-group-item">
+              <app-recursive-categories [recursiveList]="category"></app-recursive-categories>
+            </li>
+          </ul>
+        </div>
+    </div>
+</div>
