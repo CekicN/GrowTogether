@@ -10,19 +10,23 @@ import { StoreModule } from '@ngrx/store';
 import { ProfileEffects } from './state/profile.effects';
 import { PROFILE_STATE_NAME } from './state/profile.selector';
 import { ProfileReducer } from './state/profile.reducer';
-
+import { AddPlantModalComponent } from './add-plant-modal/add-plant-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
     ProfileImageComponent,
-    ProfileDataComponent
+    ProfileDataComponent,
+    AddPlantModalComponent
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     EffectsModule.forFeature([ProfileEffects]),
     StoreModule.forFeature(PROFILE_STATE_NAME,ProfileReducer)
   ]

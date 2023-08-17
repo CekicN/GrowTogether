@@ -9,7 +9,7 @@ const _profileReducer = createReducer(initialState,
             ...state,
             imageUrl:action.url
         }
-    })
+    }),
     );
 
 

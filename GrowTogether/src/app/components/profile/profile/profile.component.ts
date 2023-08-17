@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
+  
+  showModal:boolean = false;
 
+  addPlant(e:boolean)
+  {
+    this.showModal = e;
+  }
 }

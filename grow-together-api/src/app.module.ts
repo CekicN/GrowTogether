@@ -6,9 +6,10 @@ import { typeOrmConfig } from 'typeorm.config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PlantModule } from './plant/plant.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), UserModule, AuthModule, PlantModule],
+  imports: [TypeOrmModule.forRoot(typeOrmConfig), UserModule, AuthModule, PlantModule, CategoryModule],
   controllers: [AppController],
   providers: [AppService],
 })

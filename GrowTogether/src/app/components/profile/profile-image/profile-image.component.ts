@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ProfileService } from '../profile.service';
@@ -18,6 +18,9 @@ import { getProfileImage } from '../state/profile.selector';
 export class ProfileImageComponent implements OnInit {
   imageUrl!:Observable<SafeUrl>;
   id!:number|undefined;
+
+  @Output() showModalEmitter = new EventEmitter<boolean>();
+
   constructor(
     private library:FaIconLibrary, 
     private profileService:ProfileService, 
@@ -40,5 +43,10 @@ export class ProfileImageComponent implements OnInit {
       let file = inputFile?.files[0];
       this.store.dispatch(uploadProfileImageStart({id:this.id, file}));
     }
+  }
+
+  addPlant()
+  {
+    this.showModalEmitter.emit(true);
   }
 }

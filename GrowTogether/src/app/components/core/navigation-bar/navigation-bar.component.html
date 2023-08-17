@@ -11,9 +11,7 @@
         <li class="nav-item Log rounded hover" >
             <a class="nav-link" routerLink="/plants" routerLinkActive="active">Plants</a>
         </li>
-        <li class="nav-item Log rounded hover" >
-            <a class="nav-link" routerLink="/forum" routerLinkActive="active">Forum</a>
-        </li>
+
         <li class="nav-item Log rounded hover" *ngIf="!(isAuthenticated | async)">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">Log In</a>
         </li>
