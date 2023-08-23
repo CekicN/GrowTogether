@@ -29,6 +29,7 @@
     "@microsoft/signalr": "^7.0.5",
     "@ng-bootstrap/ng-bootstrap": "^15.0.0",
     "@ngrx/effects": "^16.2.0",
+    "@ngrx/entity": "^16.2.0",
     "@ngrx/store": "^16.2.0",
     "@ngrx/store-devtools": "^16.2.0",
     "@popperjs/core": "^2.11.7",

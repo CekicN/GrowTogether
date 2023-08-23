@@ -9,6 +9,7 @@ import { getUserId } from '../../user-auth/state/auth.selector';
 import { Observable, of } from 'rxjs';
 import { getProfileImageStart, uploadProfileImageStart } from '../state/profile.actions';
 import { getProfileImage } from '../state/profile.selector';
+import { addEmptyPlant } from '../../plant/state/plant/plant.action';
 
 @Component({
   selector: 'app-profile-image',
@@ -18,8 +19,6 @@ import { getProfileImage } from '../state/profile.selector';
 export class ProfileImageComponent implements OnInit {
   imageUrl!:Observable<SafeUrl>;
   id!:number|undefined;
-
-  @Output() showModalEmitter = new EventEmitter<boolean>();
 
   constructor(
     private library:FaIconLibrary, 
@@ -47,6 +46,7 @@ export class ProfileImageComponent implements OnInit {
 
   addPlant()
   {
-    this.showModalEmitter.emit(true);
+    this.profileService.setShowModalState(true);
+    this.store.dispatch(addEmptyPlant());
   }
 }

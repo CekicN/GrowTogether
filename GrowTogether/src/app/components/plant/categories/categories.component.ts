@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PlantService } from '../plant.service';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
-import { selectCategories } from '../../category/state/category/category.selector';
-import { getCategories } from '../../category/state/category/category.action';
+import { selectCategories } from '../state/plant/plant.selector';
+import { getCategories } from '../state/plant/plant.action';
+
 
 @Component({
   selector: 'app-categories',

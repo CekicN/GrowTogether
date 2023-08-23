@@ -1,14 +1,34 @@
 import { createReducer, on } from "@ngrx/store";
-import { initialState } from "./plant.state";
-import { getPlantsSuccess } from "./plant.action";
+import { initialState, plantAdapter } from "./plant.state";
+import { addEmptyPlantSuccess, addPlantImagesSuccess, addPlantSuccess, getCategoriesSuccess, getPlantsSuccess } from "./plant.action";
+import { Plant } from "src/app/Models/plant.model";
 
 const _plantReducer = createReducer(initialState, 
     on(getPlantsSuccess, (state, action) => {
+        return plantAdapter.setAll(action.plants, state);
+    }),
+    on(getCategoriesSuccess, (state, action) => {
         return {
             ...state,
-            plants:action.plants
+            categories: action.categories
         }
     }),
+    on(addEmptyPlantSuccess, (state, action) => {
+        return {
+            ...state,
+            newPlantId:action.newPlantId
+        }
+    }),
+    on(addPlantSuccess, (state, action) => {
+        return plantAdapter.addOne(action.plant, state);
+    }),
+    on(addPlantImagesSuccess, (state, action) => {
+        return {
+            ...state,
+            newPlantimageUrls:action.imageUrls
+        }
+    }),
+    
     );
 
 

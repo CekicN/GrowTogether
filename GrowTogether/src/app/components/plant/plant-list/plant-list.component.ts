@@ -15,7 +15,7 @@ import { getPlants } from '../state/plant/plant.action';
   styleUrls: ['./plant-list.component.css']
 })
 export class PlantListComponent {
-  plants!:Observable<Plant[]>;
+  plants!:Plant[];
 
   //public productList!: Product[];
   constructor(library:FaIconLibrary, private plantService:PlantService, private store:Store<AppState>)
@@ -23,11 +23,11 @@ export class PlantListComponent {
     library.addIcons(faShoppingCart);
   }
   ngOnInit(): void {
-    this.plants = this.store.select(selectPlants);
     this.store.dispatch(getPlants());
-  }
+    this.store.select(selectPlants).subscribe(value => this.plants = value);
+    console.log(this.plants);  }
 
-  addToCart(item: any) {
-      
+  addToCart(item: number) {
+      this.plantService.setShowModalState(true, item);
   }
 }

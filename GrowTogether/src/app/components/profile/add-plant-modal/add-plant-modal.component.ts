@@ -1,5 +1,13 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProfileService } from '../profile.service';
+import { AppState } from 'src/app/store/app.state';
+import { Store } from '@ngrx/store';
+import { selectCategories, selectNewPlantId, selectNewPlantImages } from '../../plant/state/plant/plant.selector';
+import { addPlant, addPlantImages, getCategories, getPlants } from '../../plant/state/plant/plant.action';
+import { getUserId } from '../../user-auth/state/auth.selector';
+import { addPlantDto } from 'src/app/Dto/add-plant.dto';
+import { PlantService } from '../../plant/plant.service';
 
 
 @Component({
@@ -9,16 +17,21 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AddPlantModalComponent {
 
-  @Input() displayStyle:boolean = false;
+  displayStyle!:boolean;
   other = false;
   categories!:Category[];
 
   addPlantForm!:FormGroup;
-  imageUrl:string[] = ["https://localhost:7200//uploads/common/noimage.png"];
+  imageUrl:string[] = ["../../../assets/images/plant_hand_large.png"];
 
   constructor(private fb:FormBuilder,
-              private cdr:ChangeDetectorRef)
+              private cdr:ChangeDetectorRef, 
+              private profileService:ProfileService, 
+              private plantService:PlantService,
+              private store:Store<AppState>)
   {
+    profileService.showModal$.subscribe(value => this.displayStyle = value);
+
     this.addPlantForm = fb.group({
       name:['', Validators.required],
       plantType:['', Validators.required],
@@ -42,7 +55,11 @@ export class AddPlantModalComponent {
     return null;
   }
   ngOnInit(): void {
-    
+    this.store.select(selectCategories).subscribe(categories => {
+      this.categories = extractCategories(categories);
+    });
+    this.store.select(selectNewPlantImages).subscribe(images => this.imageUrl = images);
+    this.store.dispatch(getCategories());
   }
 
   isOther(event:Event)
@@ -58,15 +75,21 @@ export class AddPlantModalComponent {
   closeModal()
   {
     this.addPlantForm.reset();
-    console.log(this.displayStyle);
-    this.displayStyle = false;
+    this.profileService.setShowModalState(false);
   }
   addPlant()
   {
     if(this.addPlantForm.valid)
     {
-      
-      
+      let plantId:number = -1;
+      let userId:number = -1;
+      const plantDto:addPlantDto = this.addPlantForm.value;
+      this.store.select(selectNewPlantId).subscribe(val => plantId = val);
+      this.store.select(getUserId).subscribe((val) => userId = val);
+      //dispatch za novu biljku
+      plantDto.userId = userId;
+      this.profileService.setShowModalState(false);
+      this.store.dispatch(addPlant({plantDto,plantId}))
     }  
     else
     {
@@ -92,7 +115,13 @@ export class AddPlantModalComponent {
     const files = (<HTMLInputElement>event.target).files;
     if(files)
     {
-      
+      this.store.dispatch(getPlants());
+      const primitiveFileList:File[] = Array.from(files);
+      console.log(primitiveFileList);
+      let id:number = -1;
+      this.store.select(selectNewPlantId).subscribe(value => id = value);
+      //this.plantService.uploadImages(files, id).subscribe(res => console.log(res));
+      this.store.dispatch(addPlantImages({files:primitiveFileList,id}))
     }
   }
 }

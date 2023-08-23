@@ -11,8 +11,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PlantEffects } from './state/plant/plant.effects';
 import { PLANT_STATE_NAME } from './state/plant/plant.selector';
 import { PlantReducer } from './state/plant/plant.reducer';
-import { CategoryModule } from '../category/category.module';
 import { PlantService } from './plant.service';
+import { PlantDetailsComponent } from './plant-details/plant-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,11 +22,14 @@ import { PlantService } from './plant.service';
     PlantComponent,
     CategoriesComponent,
     PlantListComponent,
-    RecursiveCategoriesComponent
+    RecursiveCategoriesComponent,
+    PlantDetailsComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     FontAwesomeModule,
     EffectsModule.forFeature([PlantEffects]),
     StoreModule.forFeature(PLANT_STATE_NAME,PlantReducer),

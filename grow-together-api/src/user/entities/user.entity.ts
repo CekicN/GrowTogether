@@ -1,3 +1,4 @@
+import { Order } from "src/order/entities/order.entity";
 import { Plant } from "src/plant/entities/plant.entity";
 import {BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 
@@ -49,5 +50,8 @@ export class User extends BaseEntity{
 
     @OneToMany(type => Plant, plant => plant.user)
     userPlants:Plant[];
+
+    @OneToMany(type => Order, order => order.user)
+    orders:Order[];
 }
 

@@ -10,5 +10,5 @@
 .bg{
     background-color: #0a4226;
     z-index: -2;
-    height: 90vh;
+    min-height: 90vh;
 }

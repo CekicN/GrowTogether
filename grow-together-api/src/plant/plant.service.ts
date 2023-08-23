@@ -71,12 +71,20 @@ export class PlantService {
     {
         return Plant.findOneBy({id});
     }
+    async getUserEmail(id:number)
+    {
+        const plant = await Plant.findOne({relations:['user'], where:{id}})
 
+        return plant.user.email;
+    }
     async getAllPlants()
     {
-        return Plant.find({relations:['user'], select:{
+        return Plant.find({relations:['user','category'], select:{
             user:{
-                id:true
+                username:true
+            },
+            category:{
+                name:true
             }
         }});
     }

@@ -1,6 +1,7 @@
 import { Category } from "src/category/entities/category.entity";
+import { Order } from "src/order/entities/order.entity";
 import { User } from "src/user/entities/user.entity";
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 
@@ -28,4 +29,7 @@ export class Plant extends BaseEntity{
 
     @ManyToOne(type => Category, category => category.plants)
     category:Category;    
+
+    @OneToOne(type => Order, order => order.plant)
+    order:Order;
 }

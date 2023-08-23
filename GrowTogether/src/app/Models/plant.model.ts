@@ -5,10 +5,15 @@ export interface Plant{
     plantType:string,
     address:string,
     description:string,
-    user:UserId,
+    user:Username,
+    category:Category,
     imageUrls:string[]
 }
 
-interface UserId{
-    id:number
+interface Username{
+    username:string
+}
+
+interface Category{
+    name:string
 }

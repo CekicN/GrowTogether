@@ -1,0 +1,75 @@
+<div *ngIf="plant|async as plant" [ngStyle]="{'display': displayStyle ? 'block' : 'none'}" class="modal pozadina bd-example-modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{plant.user.username}}</h5>
+            <fa-icon [icon]="['fas', 'xmark']" (click)="closeModal()" size="xl" style="cursor:pointer;"></fa-icon>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+                <!-- slika -->
+                <div class="col-md-6">
+                    <div id="carouselExampleIndicators" class="carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" 
+                            data-bs-target="#carouselExampleIndicators" 
+                            [attr.data-bs-slide-to]="i" 
+                            *ngFor="let src of plant.imageUrls; let i = index" 
+                            [class.active]="i === 0"
+                            [attr.aria-label]="'Slide ' + (i+1)">
+                        </button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" *ngFor="let src of plant.imageUrls;let i = index" [class.active]="i === 0">
+                            <img [src]="src" class="d-block w-100" alt="Slide {{i+1}}">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <div class="row position-absolute bottom-0 start-0 ms-2">
+                        <p>ID: <span>{{plant.id}}</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6 product_content">
+                    <h4>{{plant.name}}</h4>
+                    <hr>
+                    <p>{{plant.description}}</p>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Address: <span>{{plant.address}}</span></h5>
+                        </div>
+                    </div>
+                    <!-- kolicina i mail -->
+                    <form [formGroup]="contactForm">
+                        <div class="form-group pt-3">
+                            <div class="input-field">
+                                <input formControlName="email" type="text" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group pt-3">
+                            <div class="input-field">
+                                <input formControlName="quantity" type="number" placeholder="Num">
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="d-flex row">
+                        <button (click)="Contact()" type="button" class="btn btn-primary"><fa-icon [icon]="['fas', 'shopping-cart']"></fa-icon>Contact</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
