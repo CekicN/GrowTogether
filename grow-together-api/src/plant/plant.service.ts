@@ -88,4 +88,9 @@ export class PlantService {
             }
         }});
     }
+
+    async deletePlant(id:number)
+    {
+        return Plant.delete(id);
+    }
 }

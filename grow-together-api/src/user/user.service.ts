@@ -33,6 +33,10 @@ export class UserService {
     {
         return User.update(id, user);
     }
+    async deleteUser(id:number)
+    {
+        return User.delete(id);
+    }
     async getUserByEmail(email:string)
     {
         return User.findOne({where:{email}});

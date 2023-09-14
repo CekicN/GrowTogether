@@ -6,7 +6,7 @@ export const typeOrmConfig:ConnectionOptions = {
     host: 'localhost',
     port: 5432,
     username: 'postgres',
-    password: 'mysecretpassword',
+    password: 'mypassword',
     database: "GrowTogetherDB",
     entities:[__dirname + '/**/entities/*.entity{.ts,.js}'],
     synchronize:true

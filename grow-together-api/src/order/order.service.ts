@@ -27,12 +27,16 @@ export class OrderService {
         if(plant === null)
             throw new BadRequestException("plant not found");
         let order = new Order();
-        order.plant = plant;
+        console.log(plant);
+        order.plant = plant.name;
+        order.email = await this.plantService.getUserEmail(orderDto.plantId);
         order.user = user;
         order.quantity = orderDto.quantity;
 
         const userEmail:string = await this.plantService.getUserEmail(orderDto.plantId);
         Order.save(order);
+        this.plantService.deletePlant(orderDto.plantId);
+        
         // const content = `${orderDto.email} order a ${plant.name}, quantity: ${orderDto.quantity}`;
         // console.log(plant.user);
         // const email:emailDto = {
@@ -41,6 +45,8 @@ export class OrderService {
             // content
         // } 
         // this.sendMail(email);
+
+        return orderDto.plantId;
     }
 
     private async setTransport() {

@@ -16,7 +16,9 @@ export class Order extends BaseEntity{
     @ManyToOne(type => User, user => user.orders)
     user:User;
 
-    @OneToOne(type => Plant, plant => plant.order)
-    @JoinColumn()
-    plant:Plant;
+    @Column()
+    plant:string
+
+    @Column()
+    email:string
 }

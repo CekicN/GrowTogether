@@ -1,4 +1,4 @@
-<div class="card mb-4">
+<div class="card mb-4" *ngIf="user | async as user">
     <div class="card-body text-center d-flex flex-column">
       <span class="d-flex flex-row-reverse span align-self-center">
         <label for="image-input">
@@ -7,7 +7,7 @@
         <input type="file" id="image-input" (change)="uploadImage($event)">
         <img id="avatar" [src]="imageUrl | async" class="rounded-circle img-fluid" style="width: 200px;">
       </span>
-      <h5 class="my-3">CEKA</h5>
+      <h5 class="my-3">{{user.username}}</h5>
       <div class="d-flex justify-content-center mb-2">
         <button type="button" class="btn btn-success" (click)="addPlant()">Post Plant</button>
       </div>

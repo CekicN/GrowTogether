@@ -11,5 +11,5 @@ export const plantAdapter = createEntityAdapter<Plant>();
 export const initialState:PlantState=plantAdapter.getInitialState({
     categories:[],
     newPlantId:-1,
-    newPlantimageUrls:[]
+    newPlantimageUrls:["../../../assets/images/no_image.jpg"]
 })

@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { initialState, plantAdapter } from "./plant.state";
-import { addEmptyPlantSuccess, addPlantImagesSuccess, addPlantSuccess, getCategoriesSuccess, getPlantsSuccess } from "./plant.action";
+import { addEmptyPlantSuccess, addPlantImagesSuccess, addPlantSuccess, getCategoriesSuccess, getPlantsSuccess, plantContactSuccess } from "./plant.action";
 import { Plant } from "src/app/Models/plant.model";
 
 const _plantReducer = createReducer(initialState, 
@@ -20,7 +20,11 @@ const _plantReducer = createReducer(initialState,
         }
     }),
     on(addPlantSuccess, (state, action) => {
-        return plantAdapter.addOne(action.plant, state);
+        plantAdapter.addOne(action.plant, state);
+        return {
+            ...state,
+            newPlantimageUrls:["../../../assets/images/no_image.jpg"]
+        }
     }),
     on(addPlantImagesSuccess, (state, action) => {
         return {
@@ -28,7 +32,10 @@ const _plantReducer = createReducer(initialState,
             newPlantimageUrls:action.imageUrls
         }
     }),
-    
+    on(plantContactSuccess, (state, action) => {
+        console.log(action.id);
+        return plantAdapter.removeOne(action.id, state);
+    })
     );
 
 

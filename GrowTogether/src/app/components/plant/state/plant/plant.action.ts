@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { addPlantDto } from "src/app/Dto/add-plant.dto";
+import { orderDto } from "src/app/Dto/order.dto";
 import { Plant } from "src/app/Models/plant.model";
 
 
@@ -12,6 +13,8 @@ export const ADD_PLANT = '[plant page] add plant';
 export const ADD_PLANT_SUCCESS = '[plant page] add plant success';
 export const ADD_PLANT_IMAGES = '[plant page] add plant images';
 export const ADD_PLANT_IMAGES_SUCCESS = '[plant page] add plant images success';
+export const PLANT_CONTACT = '[plant page] plant contact';
+export const PLANT_CONTACT_SUCCESS = '[plant page] plant contact success';
 
 export const GET_CATEGORIES = '[plant page] get categories';
 export const GET_CATEGORIES_SUCCESS = '[plant page] get categories success';
@@ -30,3 +33,6 @@ export const addPlantSuccess = createAction(ADD_PLANT_SUCCESS, props<{plant:Plan
 
 export const addPlantImages = createAction(ADD_PLANT_IMAGES, props<{files:any, id:number}>());
 export const addPlantImagesSuccess = createAction(ADD_PLANT_IMAGES_SUCCESS, props<{imageUrls:string[]}>());
+
+export const plantContact = createAction(PLANT_CONTACT, props<{order:orderDto}>());
+export const plantContactSuccess = createAction(PLANT_CONTACT_SUCCESS, props<{id:number}>());

@@ -5,11 +5,12 @@ import { ProfileService } from '../profile.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
-import { getUserId } from '../../user-auth/state/auth.selector';
+import { getUser, getUserId } from '../../user-auth/state/auth.selector';
 import { Observable, of } from 'rxjs';
 import { getProfileImageStart, uploadProfileImageStart } from '../state/profile.actions';
 import { getProfileImage } from '../state/profile.selector';
 import { addEmptyPlant } from '../../plant/state/plant/plant.action';
+import { User } from 'src/app/Models/user.model';
 
 @Component({
   selector: 'app-profile-image',
@@ -19,7 +20,7 @@ import { addEmptyPlant } from '../../plant/state/plant/plant.action';
 export class ProfileImageComponent implements OnInit {
   imageUrl!:Observable<SafeUrl>;
   id!:number|undefined;
-
+  user!:Observable<User | null>;
   constructor(
     private library:FaIconLibrary, 
     private profileService:ProfileService, 
@@ -31,6 +32,7 @@ export class ProfileImageComponent implements OnInit {
   }
   ngOnInit(): void {
     this.imageUrl = this.store.select(getProfileImage);
+    this.user = this.store.select(getUser);
   }
 
 

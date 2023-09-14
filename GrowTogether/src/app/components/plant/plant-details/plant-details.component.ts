@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { selectPlantById } from '../state/plant/plant.selector';
 import { Observable } from 'rxjs';
 import { orderDto } from 'src/app/Dto/order.dto';
+import { plantContact } from '../state/plant/plant.action';
 
 @Component({
   selector: 'app-plant-details',
@@ -50,6 +51,6 @@ export class PlantDetailsComponent {
       plantId:id
     }
 
-    this.plantService.addOrder(order).subscribe(() => {this.closeModal()});
+    this.store.dispatch(plantContact({order}));
   }
 }

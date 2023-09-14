@@ -9,6 +9,6 @@ export class OrderController {
     @Post('addOrder')
     addOrder(@Body() orderDto:orderDto)
     {
-        this.orderService.addOrder(orderDto);
+        return this.orderService.addOrder(orderDto);
     }
 }

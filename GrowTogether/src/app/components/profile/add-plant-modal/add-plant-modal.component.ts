@@ -22,7 +22,7 @@ export class AddPlantModalComponent {
   categories!:Category[];
 
   addPlantForm!:FormGroup;
-  imageUrl:string[] = ["../../../assets/images/plant_hand_large.png"];
+  imageUrl:string[] = [];
 
   constructor(private fb:FormBuilder,
               private cdr:ChangeDetectorRef, 
@@ -74,6 +74,8 @@ export class AddPlantModalComponent {
 
   closeModal()
   {
+
+    
     this.addPlantForm.reset();
     this.profileService.setShowModalState(false);
   }

@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import { PlantService } from "../../plant.service";
 import { exhaustMap, forkJoin, map, mergeMap } from "rxjs";
-import { addEmptyPlant, addEmptyPlantSuccess, addPlant, addPlantImages, addPlantImagesSuccess, addPlantSuccess, getCategories, getCategoriesSuccess, getPlants, getPlantsSuccess } from "./plant.action";
+import { addEmptyPlant, addEmptyPlantSuccess, addPlant, addPlantImages, addPlantImagesSuccess, addPlantSuccess, getCategories, getCategoriesSuccess, getPlants, getPlantsSuccess, plantContact, plantContactSuccess } from "./plant.action";
 import { Plant } from "src/app/Models/plant.model";
 import { selectNewPlantImages } from "./plant.selector";
 
@@ -111,5 +111,18 @@ export class PlantEffects{
                     )
                 )
             )
+        })
+
+        plantContact$ = createEffect(() => {
+            return this.actions$.pipe(
+                    ofType(plantContact),
+                    exhaustMap(action => {
+                        return this.plantService.addOrder(action.order).pipe(
+                        map((id:number) => {
+                            return plantContactSuccess({id});
+                        })
+                    )
+                })
+           )
         })
 }

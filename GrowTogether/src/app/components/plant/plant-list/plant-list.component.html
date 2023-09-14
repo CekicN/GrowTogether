@@ -1,7 +1,7 @@
 <div *ngIf="plants" class="d-flex justify-content-start flex-wrap mt-2">
     <div class="card col-md-3 margin" *ngFor="let plant of plants">
         <div class="card-body">
-            <img class="img-thumbnail w-100 h-50" [src]="plant.imageUrls[0]" alt="" style="cursor:pointer;">
+            <img class="img-thumbnail w-100 h-50" [src]="plant.imageUrls[0]" alt="" style="cursor:pointer;" (click)="addToCart(plant.id)">
             <h4 class="text-center mt-1">{{plant.name}}</h4>
             <hr>
             <div>
@@ -14,7 +14,7 @@
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
-                    <div>
+                    <div *ngIf="plant.user">
                         <span style="cursor:pointer;">By: {{plant.user.username}}</span>
                     </div>
                     <div>   

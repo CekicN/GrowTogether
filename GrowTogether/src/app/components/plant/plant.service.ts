@@ -60,6 +60,6 @@ export class PlantService {
 
   addOrder(orderDto:orderDto)
   {
-    return this.http.post(`${api}order/addOrder`, orderDto)
+    return this.http.post<number>(`${api}order/addOrder`, orderDto)
   }
 }

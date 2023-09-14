@@ -29,7 +29,4 @@ export class Plant extends BaseEntity{
 
     @ManyToOne(type => Category, category => category.plants)
     category:Category;    
-
-    @OneToOne(type => Order, order => order.plant)
-    order:Order;
 }
